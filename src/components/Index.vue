@@ -8,6 +8,16 @@ const ai = new GoogleGenAI({apiKey});
 const result = ref('');
 const isLoading = ref(false);
 
+const textResult = computed(() => {
+    if (result.value == 'Ujaran Kebencian') {
+      return `Teks tersebut termasuk ke dalam ${result.value}`;
+    } else if (result.value == 'Bukan Ujaran Kebencian'){
+      return 'Teks tersebut bukan ujaran kebencian';
+    } else {
+      return '';
+    }
+  })
+
 async function analyze() {
   try {
     isLoading.value = true;
@@ -48,16 +58,6 @@ async function analyze() {
   } finally {
     isLoading.value = false;
   }
-
-  const textResult = computed(() => {
-    if (result.value == 'Ujaran Kebencian') {
-      return `Teks tersebut termasuk ke dalam ${result.value}`;
-    } else if (result.value == 'Bukan Ujaran Kebencian'){
-      return 'Teks tersebut bukan ujaran kebencian';
-    } else {
-      return '';
-    }
-  })
 }
 </script>
 
