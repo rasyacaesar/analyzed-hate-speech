@@ -1,6 +1,6 @@
 <script setup>
 import { GoogleGenAI } from "@google/genai";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Spinner from "./Spinner.vue";
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -48,6 +48,14 @@ async function analyze() {
   } finally {
     isLoading.value = false;
   }
+
+  computed(() => {
+    if (result.value == 'Ujaran Kebencian') {
+      return `Teks tersebut termasuk ke dalam ${result.value}`
+    } else {
+      return 'Teks tersebut bukan ujaran kebencian'
+    }
+  })
 }
 </script>
 
@@ -91,7 +99,7 @@ async function analyze() {
       <Spinner v-if="isLoading" size="small"/>
       Analisis Komentar
     </button>
-    <div class="result" id="resultText">Teks tersebut termasuk ke dalam {{ result }}</div>
+    <div class="result" id="resultText">{{ result }}</div>
   </div>
 </template>
 
