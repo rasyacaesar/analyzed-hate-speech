@@ -49,11 +49,13 @@ async function analyze() {
     isLoading.value = false;
   }
 
-  computed(() => {
+  const textResult = computed(() => {
     if (result.value == 'Ujaran Kebencian') {
-      return `Teks tersebut termasuk ke dalam ${result.value}`
+      return `Teks tersebut termasuk ke dalam ${result.value}`;
+    } else if (result.value == 'Bukan Ujaran Kebencian'){
+      return 'Teks tersebut bukan ujaran kebencian';
     } else {
-      return 'Teks tersebut bukan ujaran kebencian'
+      return '';
     }
   })
 }
@@ -99,7 +101,7 @@ async function analyze() {
       <Spinner v-if="isLoading" size="small"/>
       Analisis Komentar
     </button>
-    <div class="result" id="resultText">{{ result }}</div>
+    <div class="result" id="resultText">{{ textResult }}</div>
   </div>
 </template>
 
